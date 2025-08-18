@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motovault Premia Bike Showroom</title>
+    <link rel="stylesheet" href="p5.css">
+</head>
+<body>
+          <nav>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#bike-specifications">Specifications</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#videos">Videos</a>
+                <a href="#Contact">Contact</a>
+            </nav>
+    <section id="home">
+        <h1>Welcome to Our Motovault Premia</h1>
+        <p>Explore our latest Imported bikes</p>
+    </section>
+    <section id="bike-specifications">
+        <h2>Bikes Collections</h2>
+        <div class="bike">
+                <img src="1.jpeg" alt="Kawasaki H2R">
+                <h3>h2r</h3>
+                <p>RS.70,00,000</p>
+                <button onclick="addToCart('h2r')">Add to cart</button>
+            </div>
+            <div class="bike">
+                <img src="2.jpeg" alt="BMW M1000RR">
+                <h3>BMWm1000rr</h3>
+                <p>RS.30,00,000</p>
+                <button onclick="addToCart('BMWm1000rr')">Add to cart</button>
+            </div>
+            <div class="bike">
+                <img src="3.jpeg" alt="Kawasaki ZX-10R">
+                <h3>zx10r</h3>
+                <p>RS.16,00,000</p>
+                <button onclick="addToCart('zx10r')">Add to cart</button>
+            </div>
+            <div class="bike">
+                <img src="4.jpeg" alt="Ducati Panigale V4S">
+                <h3>ducatipanigalev4s</h3>
+                <p>RS.45,00,000</p>
+                <button onclick="addToCart('ducatipanigalev4s')">Add to cart</button>
+            </div>
+            <div class="bike">
+                <img src="5.jpeg" alt="Yamaha MT-10">
+                <h3>MT-10</h3>
+                <p>RS.14,00,000</p>
+                <button onclick="addToCart('MT-10')">Add to cart</button>
+            </div>
+            <h3 id="cart-items">Cart: Empty</h3>
+        </div>
+    </section>
+    <section>
+        <h2>Available bikes</h2>
+        <div>
+            <input type="text" id="searchbox" placeholder="Search bikes...">
+        </div>
+        <div id="bikelist">
+            <div class="bike-card" data-name="h2r">
+                <img src="1.jpeg" alt="Kawasaki H2R">
+                <h3>h2r</h3>
+                <p>RS.70,00,000</p>
+            </div>
+            <div class="bike-card" data-name="bmwm1000rr">
+                <img src="2.jpeg" alt="BMW M1000RR">
+                <h3>BMWm1000rr</h3>
+                <p>RS.30,00,000</p>
+            </div>
+            <div class="bike-card" data-name="zx10r">
+                <img src="3.jpeg" alt="Kawasaki ZX-10R">
+                <h3>zx10r</h3>
+                <p>RS.16,00,000</p>
+            </div>
+            <div class="bike-card" data-name="ducatipanigalev4s">
+                <img src="4.jpeg" alt="Ducati Panigale V4S">
+                <h3>Ducati Panigale V4S</h3>
+                <p>RS.45,00,000</p>
+            </div>
+            <div class="bike-card" data-name="hondacbrfireblade">
+                <img src="5.jpeg" alt="Honda CBR Fireblade">
+                <h3>Honda CBR Fireblade</h3>
+                <p>RS.18,00,000</p>
+            </div>
+        </div>
+    </section>
+    <section id="Contact">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <input type="text" id="name" name="name" placeholder="Enter your name">
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+            <input type="tel" id="tel" name="phone" placeholder="Mobile number">
+            <textarea id="message" name="message" placeholder="Enter your message"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="thankyou">
+            <h2>Thank You</h2>
+            <p>For contacting us, we will get back to you soon.</p>
+        </div>
+    </section>
+
+    <script>
+        let cart = [];
+        function addToCart(bikeName) {
+            cart.push(bikeName);
+            document.getElementById("cart-items").innerText = "Cart: " + cart.join(", ");
+        }
+
+        document.getElementById("searchbox").addEventListener("keyup", function() {
+            let filter = this.value.toLowerCase();
+            let bikes = document.querySelectorAll(".bike-card");
+            bikes.forEach(bike => {
+                let name = bike.getAttribute("data-name").toLowerCase();
+                bike.style.display = name.includes(filter) ? "block" : "none";
+            });
+        });
+
+        document.getElementById("contact-form").addEventListener("submit", function(e) {
+            e.preventDefault(); 
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let phone = document.getElementById("tel").value.trim();
+            let message = document.getElementById("message").value.trim();
+
+            if (name === "" || email === "" || phone === "" || message === "") {
+                alert("Please fill all fields");
+                return;
+            }
+            if (!email.includes("@")) {
+                alert("Please enter a valid email");
+                return;
+            }
+            if (phone.length < 10) {
+                alert("Please enter a valid phone number");
+                return;
+            }
+
+            document.getElementById("Contact").style.display = "none";
+            document.getElementById("thankyou").style.display = "block";
+        });
+    </script>
+</body>
+</html>
